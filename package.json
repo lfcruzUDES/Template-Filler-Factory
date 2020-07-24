@@ -1,0 +1,32 @@
+{
+  "name": "template-filler-factory",
+  "version": "1.0.0",
+  "description": "Script for fill Google Slides with data from Goolge SpreadSheet",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lfcruzUDES/Template-Filler-Factory.git"
+  },
+  "keywords": [
+    "Goolge",
+    "Typescript",
+    "Slides",
+    "Spreadsheet",
+    "GAS",
+    "Google",
+    "Apps",
+    "Script"
+  ],
+  "author": "Luis Fernando Cruz Carrillo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lfcruzUDES/Template-Filler-Factory/issues"
+  },
+  "homepage": "https://github.com/lfcruzUDES/Template-Filler-Factory#readme",
+  "dependencies": {
+    "@types/google-apps-script": "^1.0.14"
+  }
+}
