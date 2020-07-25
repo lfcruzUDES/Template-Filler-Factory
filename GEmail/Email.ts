@@ -49,5 +49,11 @@ namespace EMAIL {
         return html_body;
     }
 
-
+    /**
+     * Get HTML from file.
+     * @param template
+     */
+    export function get_html_from_file(template: string) {
+        return HtmlService.createHtmlOutputFromFile(template).getContent();
+    }
 }

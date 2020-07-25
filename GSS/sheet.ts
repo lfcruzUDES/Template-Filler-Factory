@@ -61,7 +61,8 @@ namespace SHEET {
         sheet_conn(): Sheet_type {
             let ss = this.book_conn();
             if (this.sheet_name) {
-                this.sheet = <Sheet_type>ss.getSheetByName(this.sheet_name);
+                this.sheet = <Sheet_type>ss.getSheetByName(this.sheet_name)
+                this.sheet = this.sheet ? this.sheet : this.insertSheet();
             } else {
                 this.sheet = ss.getActiveSheet();
             }
@@ -81,15 +82,17 @@ namespace SHEET {
             if (name_sheet) {
                 try {
                     return ss.insertSheet(name_sheet);
-
                 } catch (error) {
                     return <Sheet_type>ss.getSheetByName(name_sheet);
                 }
             } else {
-                return <Sheet_type>ss.getSheetByName(SETTINGS.DEFAULT_NAMESHEET);
+                throw new Error("A name for new sheet is needed.");
             }
         }
 
+        /**
+         * Gets name sheets of a book.
+         */
         get_book_sheet_names() {
             return this.book.getSheets()
                 .map(el => el.getName());
@@ -108,8 +111,8 @@ namespace SHEET {
 
         /**
          * Return col as a simple array. This function by default not takes headers,
-         * so the first row is discarted, but if as second param is pased a integer,
-         * it will taked as a row where column starts.
+         * so the first row is discarded, but if as second param is passed a integer,
+         * it will take as a row where column starts.
          * @param col : number, in Google Sheets cols starts at 1 not in 0.
          */
         col_as_array(col: number, row: number = 2) {
@@ -117,6 +120,22 @@ namespace SHEET {
                 .getRange(row, col, this.sheet.getLastRow(), 1)
                 .getValues();
             return values.map(el => el[0]);
+        }
+
+        /**
+         * Return simple array as colum.
+         * @param arr : Simple array.
+         */
+        array_as_col(arr: any[]) {
+            return arr.map(el => [el]);
+        }
+
+        /**
+         * Insert a entire column.
+         */
+        overwrite_col(col_values: any[][], col: number, row: number = 2) {
+            this.sheet.getRange(row, col, col_values.length, 1)
+                .setValues(col_values);
         }
 
     }
